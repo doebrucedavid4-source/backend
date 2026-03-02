@@ -96,7 +96,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
-CORS_ALLOWED_ORIGINS = split_env(
+CORS_ALLOWED_ORIGINS = [
+    "https://frontend-bay-eight-oi2ytneeu9.vercel.app",
+] + split_env(
     os.environ.get(
         "CORS_ALLOWED_ORIGINS",
         "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080,http://127.0.0.1:8080",
