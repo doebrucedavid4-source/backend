@@ -98,6 +98,7 @@ REST_FRAMEWORK = {
 
 CORS_ALLOWED_ORIGINS = [
     "https://frontend-bay-eight-oi2ytneeu9.vercel.app",
+    "http://192.168.56.1:8080",
 ] + split_env(
     os.environ.get(
         "CORS_ALLOWED_ORIGINS",
