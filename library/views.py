@@ -7,6 +7,7 @@ from django.db.models import Q, Sum
 from django.utils import timezone
 from django.utils.dateparse import parse_date
 from django.utils.decorators import method_decorator
+from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status, viewsets
 from rest_framework.authentication import SessionAuthentication
@@ -122,7 +123,7 @@ class CsrfView(APIView):
     authentication_classes = [SessionAuthentication]
 
     def get(self, request):
-        return Response({"detail": "ok"})
+        return Response({"detail": "ok", "csrfToken": get_token(request)})
 
 
 class LoginView(APIView):
