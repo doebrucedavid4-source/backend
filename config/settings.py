@@ -31,10 +31,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -62,9 +62,10 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Configure DATABASES from DATABASE_URL env var if present, otherwise fallback to sqlite
+# Nouveau code
 DATABASES = {
     "default": dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
     )
 }
@@ -108,12 +109,9 @@ AUTHENTICATION_BACKENDS = [
     "library.authentication.EmailBackend",
 ]
 
-CORS_ALLOWED_ORIGINS = split_env(
-    os.environ.get(
-        "CORS_ALLOWED_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080,http://127.0.0.1:8080,http://localhost:8082,http://127.0.0.1:8082",
-    )
-)
+CORS_ALLOWED_ORIGINS = [
+    "https://frontend-doebrucedavid4-sources-projects.vercel.app",
+]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
