@@ -109,9 +109,12 @@ AUTHENTICATION_BACKENDS = [
     "library.authentication.EmailBackend",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://frontend-doebrucedavid4-sources-projects.vercel.app",
-]
+CORS_ALLOWED_ORIGINS = split_env(
+    os.environ.get(
+        "CORS_ALLOWED_ORIGINS",
+        "https://frontend-doebrucedavid4-sources-projects.vercel.app",
+    )
+)
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
